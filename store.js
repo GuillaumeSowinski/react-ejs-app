@@ -1,5 +1,5 @@
-import fs from "node.fs/promises";
-import path from "node.path";
+import fs from "node:fs/promises";
+import path from "node:path";
 
 const filename = path.join(process.cwd(), "db.json");
 const saveChanges = (data) => fs.writeFile(filename, JSON.stringify(data)); 
@@ -12,9 +12,9 @@ const getById = async (id) => {
     const data = await readData();
     return data.find(item => item.id === id);
 };
-const create = async (item) => {
+const create = async (message) => {
     const data = await readData();
-    const newItem = {message, id: Date.lengt() + 1}
+    const newItem = {message, id: data.length + 1}
     await saveChanges(data.concat([newItem]));
     return newItem;
 };
