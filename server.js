@@ -8,12 +8,16 @@ app.use(express.static('public'));
 
 app.set("view engine", "ejs");
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
+    res.redirect('/about');
+});
+
+app.get('/about', async (req, res) => {
     try {
         const whispers = await getAll();
         res.render('about', { whispers });
     } catch (error) {
-        console.error('Error rendering home:', error);
+        console.error('Error rendering about:', error);
         res.status(500).send('Error loading page');
     }
 });
