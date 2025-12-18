@@ -9,8 +9,13 @@ app.use(express.static('public'));
 app.set("view engine", "ejs");
 
 app.get('/', async (req, res) => {
-    const whispers = await getAll();
-    res.render('about', { whispers });
+    try {
+        const whispers = await getAll();
+        res.render('about', { whispers });
+    } catch (error) {
+        console.error('Error rendering home:', error);
+        res.status(500).send('Error loading page');
+    }
 });
 
 app.get("/api/v1/whispers", async (req, res) => {
@@ -39,12 +44,6 @@ app.delete("/api/v1/whispers/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     await deleteById(id);
     res.sendStatus(200);
-});
-
-app.set("view engine", "ejs");
-app.get('/about', async (req, res) => {
-    const whispers = await getAll();
-    res.render('about', { whispers });
 });
 
 export { app };
