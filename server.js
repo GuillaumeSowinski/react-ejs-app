@@ -6,8 +6,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.sendFile('public/index.html', { root: '.' });
+app.set("view engine", "ejs");
+
+app.get('/', async (req, res) => {
+    const whispers = await getAll();
+    res.render('about', { whispers });
 });
 
 app.get("/api/v1/whispers", async (req, res) => {
