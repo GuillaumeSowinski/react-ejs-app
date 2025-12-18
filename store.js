@@ -1,10 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const filename = path.join(__dirname, "db.json");
+const filename = path.join(process.cwd(), "db.json");
 const saveChanges = (data) => fs.writeFile(filename, JSON.stringify(data)); 
 const readData = async () => {
     const data = await fs.readFile(filename, "utf-8");
