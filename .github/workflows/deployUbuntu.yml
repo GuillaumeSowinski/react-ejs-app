@@ -31,5 +31,5 @@ jobs:
           script: |
             cd /var/www/html/api/site-guillaume-node-ejs
             npm install
-            pm2 start app.js --name whispers || pm2 restart whispers
+            pm2 start index.js --name "whispers" || pm2 restart whispers
             pm2 save
