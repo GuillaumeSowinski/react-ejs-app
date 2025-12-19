@@ -5,3 +5,6 @@ coverage/
 db.json
 jest.config.js
 jest.config.mjs
+.env
+.env.local
+.env.*.local
